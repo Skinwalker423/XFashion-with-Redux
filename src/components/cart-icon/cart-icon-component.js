@@ -1,7 +1,7 @@
 import { CartIconContainer, ShoppingIcon, ItemCount } from './cart-icon-styles.jsx';
 import { setCartDropdownDisplayed } from '../../store/cartDropdown/cartDropdown.action';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCartDisplayed, selectCartItems, selectTotalQty } from '../../store/cartDropdown/cartDropdown.selector';
+import { selectCartDisplayed, selectTotalQty } from '../../store/cartDropdown/cartDropdown.selector';
 
 const CartIcon = () => {
 

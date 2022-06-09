@@ -24,7 +24,7 @@ const ProductsSampleList = () => {
                     }
                     return(
                         <ProductCard 
-                        products={item}
+                        product={item}
                         key={item.id}
                         id={item.id}
                         category={title}

@@ -1,0 +1,1 @@
+export const selectCurrentPath = state => state.currentPath;

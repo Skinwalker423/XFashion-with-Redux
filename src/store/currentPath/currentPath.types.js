@@ -1,0 +1,4 @@
+export const CURRENT_PATH_ACTION_TYPES = {
+    'SET_CURRENT_PATH': 'SET_CURRENT_PATH'
+}
+

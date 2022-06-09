@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import { auth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-utils";
 import { GoogleAuthProvider } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";
+import { useNavigate } from "react-router-dom";
 
 import FormInput from "../form-input/form-input-component";
 import Button, {BUTTON_THEME} from "../button/button-component";
-
 import { SignInFormContainer, ButtonsContainer } from "./sign-in-form-styles";
 
 
@@ -18,6 +20,10 @@ const SignInForm = () => {
 
     const [signInFormFields, setSignInFormFields] = useState(defaultSignInFormFields);
     const { email, password } = signInFormFields;
+
+    const {currentPath} = useSelector(selectCurrentPath);
+    const navigate = useNavigate();
+
 
 
     const resetFormFields = () => {
@@ -42,6 +48,8 @@ const SignInForm = () => {
             await signInAuthUserWithEmailAndPassword(auth, email, password );
             resetFormFields();
             console.log('signed in');
+            
+            navigate(currentPath);
         }catch(error){
             alert(error.message)
         }

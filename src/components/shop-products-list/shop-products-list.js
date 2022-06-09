@@ -22,7 +22,7 @@ const ShopCategoryList = ({category}) => {
                     {products && products.map((item) =>{
                         return(
                             <ProductCard 
-                            products={item}
+                            product={item}
                             key={item.id}
                             />
                             )

@@ -1,13 +1,15 @@
-import React, {Fragment, useContext} from "react";
+import React, {Fragment} from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { signOutUser } from "../../utils/firebase/firebase-utils";
-import { CartDropdownContext } from "../../context/cart-dropdown-context";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { NavbarContainer, NavLinkContainer, LogoContainer, NavLink } from "./navbar-styles";
 import CartIcon from "../../components/cart-icon/cart-icon-component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown-component";
 import { selectCartDisplayed } from "../../store/cartDropdown/cartDropdown.selector";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentPath } from "../../store/currentPath/currentPath.acton";
 
 
 
@@ -16,6 +18,9 @@ const NavBar = () => {
 
     const currentUser = useSelector(selectCurrentUser);
     const cartDropdownDisplayed = useSelector(selectCartDisplayed);
+
+    const dispatch = useDispatch();
+    const location = useLocation();
 
     const logOffAuthUser = async() => {
 
@@ -27,6 +32,11 @@ const NavBar = () => {
             }
         }
 
+    const saveCurrentPath = () => {
+        const currentPath = location.pathname;
+        dispatch(setCurrentPath(currentPath));
+    }
+
 
     const authenticate = () => {
         if(currentUser){
@@ -35,7 +45,7 @@ const NavBar = () => {
             )
         }
         return(
-                <NavLink to={'/auth'}>Sign In</NavLink>
+                <NavLink onClick={saveCurrentPath} to={'/auth'}>Sign In</NavLink>
             )
     } 
     
