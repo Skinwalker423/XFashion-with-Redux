@@ -1,15 +1,21 @@
 import Button from '../button/button-component';
 import CartItems from './cart-items-list-component';
-import { useContext } from 'react';
-import { CartDropdownContext } from '../../context/cart-dropdown-context';
 import { CartDropDownContainer, ButtonLink } from './cart-dropdown-styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCartDisplayed } from '../../store/cartDropdown/cartDropdown.selector';
+import { setCartDropdownDisplayed } from '../../store/cartDropdown/cartDropdown.action';
+
 
 const CartDropdown = () => {
+    const dispatch = useDispatch();
+    const cartDropdownDisplayed = useSelector(selectCartDisplayed);
 
-    const {setCartDropdownDisplayed} = useContext(CartDropdownContext);
+    const  toggleCart = () => {
+        return dispatch(setCartDropdownDisplayed(!cartDropdownDisplayed));
+    }
 
     const closeDropdownCartOnCheckout = () => {
-        setCartDropdownDisplayed(false);
+        toggleCart();
     }
 
     return(

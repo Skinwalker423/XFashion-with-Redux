@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { CartDropdownContext } from '../../context/cart-dropdown-context';
 import { CartItem, ItemDetails, CartItemsContainer, Name, Price, EmptyMessage } from './cart-dropdown-styles';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cartDropdown/cartDropdown.selector';
 
 
 
 
 const CartItems = () => {
 
-    const {cartItems} = useContext(CartDropdownContext);
+    const cartItems = useSelector(selectCartItems);
 
     const renderCartItems = cartItems.map(({imageUrl, name, price, id, qty}) => {
             return (

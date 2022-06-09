@@ -1,15 +1,17 @@
 import { ShopCategoryListContainer, CategoryTitle, CatProdCont } from "./shop-products-list-styles";
-import React, {useContext, useState, useEffect} from "react";
-import { CategoriesContext } from '../../context/categories-context';
+import React, { useState, useEffect} from "react";
 import ProductCard from '../products-card/product-card-component';
+import { selectCategoriesMap } from "../../store/categories/categories.selector";
+import { useSelector } from "react-redux";
 
 
 const ShopCategoryList = ({category}) => {
 
-    const {categoriesMap} = useContext(CategoriesContext);
+    const categoriesMap = useSelector(selectCategoriesMap);
     const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(() => {
+        console.log('effect fired for setProducts');
         setProducts(categoriesMap[category]);
     }, [products, categoriesMap, category])
 

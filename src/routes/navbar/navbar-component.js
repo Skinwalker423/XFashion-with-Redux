@@ -1,19 +1,21 @@
 import React, {Fragment, useContext} from "react";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { signOutUser } from "../../utils/firebase/firebase-utils";
-import { UserContext } from "../../context/user-context";
 import { CartDropdownContext } from "../../context/cart-dropdown-context";
-
+import { selectCurrentUser } from "../../store/user/user.selector";
 import { NavbarContainer, NavLinkContainer, LogoContainer, NavLink } from "./navbar-styles";
 import CartIcon from "../../components/cart-icon/cart-icon-component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown-component";
+import { selectCartDisplayed } from "../../store/cartDropdown/cartDropdown.selector";
 
 
 
 
 const NavBar = () => {
-    const {currentUser} = useContext(UserContext);
-    const {cartDropdownDisplayed} = useContext(CartDropdownContext);
+
+    const currentUser = useSelector(selectCurrentUser);
+    const cartDropdownDisplayed = useSelector(selectCartDisplayed);
 
     const logOffAuthUser = async() => {
 

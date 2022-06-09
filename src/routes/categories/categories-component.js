@@ -5,7 +5,7 @@ import ShopCategoryList from '../../components/shop-products-list/shop-products-
 const Category = () => {
 
     const { category } = useParams();
-    console.log(category);
+    console.log('render/rerender category component');
 
     return (
         <ShopCategoryList category={category}  />
