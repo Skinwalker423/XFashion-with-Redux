@@ -10,6 +10,8 @@ import { selectCartDisplayed } from "../../store/cartDropdown/cartDropdown.selec
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentPath } from "../../store/currentPath/currentPath.acton";
+import { checkUserSession, setCurrentUser, userLogOutStart } from "../../store/user/user.action";
+
 
 
 
@@ -23,13 +25,14 @@ const NavBar = () => {
     const location = useLocation();
 
     const logOffAuthUser = async() => {
+            dispatch(userLogOutStart());
+            // try{
+            //     await signOutUser();
+            //     console.log(currentUser);
 
-            try{
-                await signOutUser();
-                console.log('logged off');
-            }catch(error){
-                alert(error.message)
-            }
+            // }catch(error){
+            //     alert(error.message)
+            // }
         }
 
     const saveCurrentPath = () => {

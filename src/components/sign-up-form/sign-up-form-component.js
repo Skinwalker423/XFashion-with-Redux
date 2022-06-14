@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
+import { useDispatch, useSelector } from "react-redux";
+import { createUserStart, signUpAndSignInFailed } from "../../store/user/user.action";
+import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";
+import { useNavigate } from "react-router-dom";
 
 import FormInput from "../form-input/form-input-component";
 import Button from "../button/button-component";
@@ -20,6 +24,11 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
 
+    const {currentPath} = useSelector(selectCurrentPath);
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+
     
 
     const resetFormFields = () => {
@@ -33,19 +42,17 @@ const SignUpForm = () => {
 
     const signUpWithEmailAndPassword = async (e) => {
         e.preventDefault();
-
         if (password !== confirmPassword) {
             console.log('password not matching');
             return;
         }
         try {
-            const {user} = await createAuthUserWithEmailAndPassword(email, password);
-            await createUserDocumentFromAuth({ ...user, displayName });
-            console.log('account created');
+            dispatch(createUserStart(displayName, email, password));
             resetFormFields();
+            navigate(currentPath);
 
         } catch (error) {
-           alert(error.message);
+           dispatch(signUpAndSignInFailed(error))
         }
 
     }

@@ -1,24 +1,25 @@
 import { ShopCategoryListContainer, CategoryTitle, CatProdCont } from "./shop-products-list-styles";
 import React, { useState, useEffect} from "react";
 import ProductCard from '../products-card/product-card-component';
-import { selectCategoriesMap } from "../../store/categories/categories.selector";
+import { selectCategoriesMap, selectIsLoading } from "../../store/categories/categories.selector";
 import { useSelector } from "react-redux";
+import Spinner from "../spinner/spinner-component";
 
 
 const ShopCategoryList = ({category}) => {
 
     const categoriesMap = useSelector(selectCategoriesMap);
+    const isLoading = useSelector(selectIsLoading);
     const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(() => {
-        console.log('effect fired for setProducts');
         setProducts(categoriesMap[category]);
     }, [products, categoriesMap, category])
 
         return(
             <ShopCategoryListContainer>
                 <CategoryTitle>{category}</CategoryTitle>
-                <CatProdCont>
+                {isLoading ? <Spinner /> : <CatProdCont>
                     {products && products.map((item) =>{
                         return(
                             <ProductCard 
@@ -27,7 +28,7 @@ const ShopCategoryList = ({category}) => {
                             />
                             )
                         })}
-                </CatProdCont>
+                </CatProdCont>}
             </ShopCategoryListContainer>
         )
 

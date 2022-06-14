@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../form-input/form-input-component";
 import Button, {BUTTON_THEME} from "../button/button-component";
 import { SignInFormContainer, ButtonsContainer } from "./sign-in-form-styles";
+import { signInSucess, signInFailed, googleSignInStart, emailSignInStart } from "../../store/user/user.action";
+import { useDispatch } from "react-redux/es/exports";
 
 
 const defaultSignInFormFields = {
@@ -17,6 +19,8 @@ const defaultSignInFormFields = {
 
 
 const SignInForm = () => {
+
+    const dispatch = useDispatch();
 
     const [signInFormFields, setSignInFormFields] = useState(defaultSignInFormFields);
     const { email, password } = signInFormFields;
@@ -36,22 +40,26 @@ const SignInForm = () => {
     }
 
 
-    const logInGoogleUser = async() => {
-        const response = await signInWithGooglePopup();
-        const credential = GoogleAuthProvider.credentialFromResult(response);
-        console.log(credential);
+    const logInGoogleUser = () => {
+        // const response = await signInWithGooglePopup();
+        // const credential = GoogleAuthProvider.credentialFromResult(response);
+        // console.log(credential);
+        dispatch(googleSignInStart(email, password));
     }
+    
+
+
 
     const onFormSubmit = async(e) => {
         e.preventDefault();
+        // dispatch(emailSignInStart(email, password));
         try{
-            await signInAuthUserWithEmailAndPassword(auth, email, password );
+            dispatch(emailSignInStart(email, password));
             resetFormFields();
-            console.log('signed in');
-            
             navigate(currentPath);
+            console.log('signed in');
         }catch(error){
-            alert(error.message)
+            dispatch(signInFailed(error))
         }
     }
 
