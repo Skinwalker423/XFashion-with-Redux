@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase-utils";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserStart, signUpAndSignInFailed } from "../../store/user/user.action";
 import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";

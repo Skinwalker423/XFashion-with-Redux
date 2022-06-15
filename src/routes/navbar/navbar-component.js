@@ -1,7 +1,6 @@
 import React, {Fragment} from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { signOutUser } from "../../utils/firebase/firebase-utils";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { NavbarContainer, NavLinkContainer, LogoContainer, NavLink } from "./navbar-styles";
 import CartIcon from "../../components/cart-icon/cart-icon-component";
@@ -10,7 +9,7 @@ import { selectCartDisplayed } from "../../store/cartDropdown/cartDropdown.selec
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentPath } from "../../store/currentPath/currentPath.acton";
-import { checkUserSession, setCurrentUser, userLogOutStart } from "../../store/user/user.action";
+import { userLogOutStart } from "../../store/user/user.action";
 
 
 
@@ -26,13 +25,6 @@ const NavBar = () => {
 
     const logOffAuthUser = async() => {
             dispatch(userLogOutStart());
-            // try{
-            //     await signOutUser();
-            //     console.log(currentUser);
-
-            // }catch(error){
-            //     alert(error.message)
-            // }
         }
 
     const saveCurrentPath = () => {

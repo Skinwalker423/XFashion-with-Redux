@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import { auth, signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-utils";
-import { GoogleAuthProvider } from "firebase/auth";
 import { useSelector } from "react-redux";
 import { selectCurrentPath } from "../../store/currentPath/currentPath.selector";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../form-input/form-input-component";
 import Button, {BUTTON_THEME} from "../button/button-component";
 import { SignInFormContainer, ButtonsContainer } from "./sign-in-form-styles";
-import { signInSucess, signInFailed, googleSignInStart, emailSignInStart } from "../../store/user/user.action";
+import { signInFailed, googleSignInStart, emailSignInStart } from "../../store/user/user.action";
 import { useDispatch } from "react-redux/es/exports";
 
 

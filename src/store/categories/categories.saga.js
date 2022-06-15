@@ -1,4 +1,4 @@
-import { all, call, takeLatest, put, take } from "redux-saga/effects";
+import { all, call, takeLatest, put } from "redux-saga/effects";
 
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase-utils";
 
@@ -6,17 +6,6 @@ import { fetchCategoriesFail, fetchCategoriesSuccess } from "./categories.action
 
 import { CATEGORIES_ACTION_TYPES } from "./categories.types";
 
-// export const fetchCategoriesAsyn = () => async(dispatch) => {
-//     dispatch(fetchCategoriesStart())
-//     try{
-//         const categoriesArray = await getCategoriesAndDocuments();
-//         dispatch(fetchCategoriesSuccess(categoriesArray));
-    
-//     }catch(error){
-//         dispatch(fetchCategoriesFail(error.message))
-//     }
-    
-// }
 
 export function* fetchCategoriesAsync(){
     try{
