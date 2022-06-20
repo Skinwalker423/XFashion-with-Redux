@@ -24,8 +24,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {...state, error: payload}
         case USER_ACTION_TYPES.SET_LOG_OUT_SUCCESS : 
             return {...state, currentUser: null}
-        // case USER_ACTION_TYPES.SIGN_UP_START : 
-        //     return {...state, ...payload}
+        case USER_ACTION_TYPES.SIGN_UP_START : 
+            return {...state, ...payload}
         // case USER_ACTION_TYPES.SIGN_UP_SUCCESS : 
         //     return {...state, ...payload}
         case USER_ACTION_TYPES.SIGN_UP_FAILED : 

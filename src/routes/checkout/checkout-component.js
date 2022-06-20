@@ -1,5 +1,7 @@
 import CheckoutItems from "../../components/checkout-item/checkout-item-component";
-import { CheckoutContainer, CheckoutHeader, HeaderBlock  } from "./checkout-styles";
+import { CheckoutContainer, CheckoutHeader, HeaderBlock, PaymentButton  } from "./checkout-styles";
+import { Link } from "react-router-dom";
+
 
 const Checkout = () => {
     return(
@@ -22,6 +24,9 @@ const Checkout = () => {
                 </HeaderBlock>
             </CheckoutHeader>
             <CheckoutItems />
+            <Link to={'/payment'}>
+                <PaymentButton title={'Pay Now'} />
+            </Link>
         </CheckoutContainer>
     )
 }

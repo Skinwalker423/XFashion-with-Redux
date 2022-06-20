@@ -1,6 +1,6 @@
 import React from "react";
 import './button-styles.jsx';
-import { BaseButton, GoogleSignInButton, InvertedButton } from "./button-styles.jsx";
+import { BaseButton, GoogleSignInButton, InvertedButton, ButtonSpinner } from "./button-styles.jsx";
 
 export const BUTTON_THEME = {
     base: 'base',
@@ -19,12 +19,12 @@ const getButton = (buttonType = BUTTON_THEME.base) => (
 
 
 
-const Button = ({title, theme, onClickHandler}) => {
+const Button = ({children, title, theme, onClickHandler, isLoading, ...otherProps}) => {
 
     const CustomButton = getButton(theme);
 
     return (
-        <CustomButton onClick={onClickHandler}>{title}</CustomButton>
+        <CustomButton disabled={isLoading} onClick={onClickHandler}>{isLoading ? <ButtonSpinner /> : title }</CustomButton>
     )
 }
 

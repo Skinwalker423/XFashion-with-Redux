@@ -112,15 +112,18 @@ export const getCategoriesAndDocuments = async() => {
     return querySnapshot.docs.map((docSnapShop) => docSnapShop.data());
 }
 
-export const createUserDocumentFromAuth = async(userAuth) => {
+export const createUserDocumentFromAuth = async(userAuth, additionalDetails) => {
     const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
     
 
     if(!userSnapshot.exists()) {
-      const { displayName, email} = userAuth;
+      const {email} = userAuth;
+      const {displayName} = additionalDetails;
+      console.log('firebase displayname:', displayName);
       const createdAt = new Date();
+      console.log('creatdocfromauth:', displayName);
 
       try{
         await setDoc(userDocRef, {

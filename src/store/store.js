@@ -13,7 +13,8 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['cartItems']
+    blacklist: ['user'],
+    whitelist: ['cartItems', 'cartDropdown']
 }
 
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../components/button/button-component";
 
 export const CheckoutContainer = styled.div`
     width: 55%;
@@ -23,4 +24,9 @@ export const HeaderBlock = styled.div`
     &:last-child {
         width: 8%;
     }
+`
+
+export const PaymentButton = styled(Button)`
+    margin-top: 500px;
+    height: 500px;
 `

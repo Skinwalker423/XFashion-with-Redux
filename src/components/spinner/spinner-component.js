@@ -1,9 +1,9 @@
 import './spinner-style.scss';
 
-const Spinner = () => {
+const Spinner = ({title}) => {
     return (
         <div id='spinner'>
-            <div className="ui active massive centered inline loader"></div>
+            <div className="ui active massive centered inline loader">{title}</div>
         </div>
     )
 }

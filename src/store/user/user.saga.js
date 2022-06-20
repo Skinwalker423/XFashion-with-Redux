@@ -1,5 +1,5 @@
 import { call, all, takeLatest, put } from "redux-saga/effects";
-import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword, auth, signOutUser } from "../../utils/firebase/firebase-utils";
+import { createUserDocumentFromAuth, createAuthUserWithEmailAndPassword, getCurrentUser, signInWithGooglePopup, signInAuthUserWithEmailAndPassword,signOutUser, auth } from "../../utils/firebase/firebase-utils";
 import { USER_ACTION_TYPES } from "./user.types";
 import { signInSucess, signInFailed, signUpAndSignInSuccess, signUpAndSignInFailed, userLogOutSuccess, userLogOutFailed } from "./user.action";
 
@@ -29,9 +29,10 @@ export function* isUserAuthenticated(){
 export function* emailSignInUserAsync({payload: {email, password}}){
 
     try{
-        const {user} = yield call(signInAuthUserWithEmailAndPassword,auth, email, password);
+        const {user} = yield call(signInAuthUserWithEmailAndPassword, auth, email, password);
         // const credential = GoogleAuthProvider.credentialFromResult(response);
         // console.log(credential);
+        console.log('this is for user info: ',user);
         yield call(createSnapshotFromUserAuth, user);
     }catch(error){
         yield put(signInFailed(error))
@@ -63,14 +64,16 @@ export function* logOutUser(){
 }
 
 export function* signInAfterSignUp({payload: {user, additionalDetails}}){
-        yield call(createSnapshotFromUserAuth, user, additionalDetails)
+        const userInfo = yield call(createSnapshotFromUserAuth, user, additionalDetails)
+        console.log(userInfo);
+        console.log(additionalDetails);
 }
 
 export function* createUserWithEmailPassword(action){
         const {email, password, displayName} = action.payload;
         try {
             const {user} = yield call(createAuthUserWithEmailAndPassword, email, password);
-            yield put(signUpAndSignInSuccess(user,{displayName}));
+            yield put(signUpAndSignInSuccess(user, {displayName}));
 
         } catch (error) {
            yield put(signUpAndSignInFailed(error));
